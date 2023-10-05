@@ -1,43 +1,43 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import ErrorPage from './routes/ErrorPage.tsx'
-import Componentes from './components/Componentes.tsx'
+import App from './App.tsx'
+import Home from './components/pages/Home.tsx'
 import SearchByIngredient from './components/pages/SearchByIngredient.tsx'
 import SearchByLetter from './components/pages/SearchByLetter.tsx'
 import SearchByName from './components/pages/SearchByName.tsx'
-import Home from './components/pages/Home.tsx'
+import { routes } from './constants/routes.ts'
+import './index.css'
+import ErrorPage from './routes/ErrorPage.tsx'
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: routes.HOME,
     element: <App/>,
-    //errorElement: <ErrorPage/>,
+    errorElement: <ErrorPage/>,
     children: [
       {
-        path: '/',
+        path: routes.HOME,
         element: <Home/>,
       },
       {
-        path: 'by-name',
+        path: routes.BY_NAME,
         element: <SearchByName/>
       },
       {
-        path: 'by-letter',
+        path: routes.BY_LETTER,
         element: <SearchByLetter/>
       },
       {
-        path: 'by-letter/:letter',
+        path: routes.BY_LETTER_PARAM,
         element: <SearchByLetter/>
       },
       {
-        path: 'by-ingredient',
+        path: routes.BY_INGREDIENT,
         element: <SearchByIngredient/>,
       },
       {
-        path: 'by-ingredient/:ingredient',
+        path: routes.BY_INGREDIENT_PARAM,
         element: <Home/>,
       },
     ]

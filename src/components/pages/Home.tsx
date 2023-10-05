@@ -34,7 +34,7 @@ function Home() {
                 img={meal.strMealThumb}
                 foodDetails={meal.strMeal}
                 url={meal.strYoutube}
-                text='YouTube' />
+                />
               )
             })
           }
