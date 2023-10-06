@@ -11,7 +11,7 @@ const Home = () => {
     const [meals, setMeals] = useState<Array<Meal>>([]);
 
     async function getMeals(pesquisa: string) {
-      await fetch(`http://www.themealdb.com/api/json/v1/1/search.php?s=${pesquisa}`)
+      await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${pesquisa}`)
       .then(data => data.json())
       .then(data => {
         setMeals(data.meals)
