@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Card from '../card/Card'
 import NoItems from "../NoItems";
+import { showSuccessToast, showErrorToast, showInfoToast } from "../../utils/toast";
+import { ToastContainer } from 'react-toastify';
 
 type Meal = {
     [key: string]: string
@@ -15,8 +17,16 @@ const MealsByIngredient = () => {
   async function getMeals(ingredient: string) {
       await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`)
       .then(data => data.json())
-      .then(data => {setMeals(data.meals)});
-    }
+      .then(data => {
+        setMeals(data.meals)
+        if (data.meals?.length > 0) {
+          showSuccessToast('Receitas encontradas!')
+        } else {
+          showInfoToast('Receitas não encontradas!')
+        }
+      })
+      .catch(() => {showErrorToast('Algo deu errado!')});
+  }
 
     useEffect(() => {
       if (ingredient) {
@@ -50,6 +60,7 @@ const MealsByIngredient = () => {
       </div>
       {ingredient && meals?.length === 0 && <NoItems />}
     </div>
+    <ToastContainer/>
     </div>
   )
 }

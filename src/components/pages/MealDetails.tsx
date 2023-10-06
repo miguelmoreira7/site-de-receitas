@@ -6,7 +6,7 @@ type Meal = {
 };
 
 const MealDetails = () => {
-    const { mealId } = useParams();
+  const { mealId } = useParams();
   const [meal, setMeal] = useState<Meal>({});
 
   async function getMeal(mealId: string) {

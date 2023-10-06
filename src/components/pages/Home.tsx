@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import Card from '../card/Card'
+import { showSuccessToast, showErrorToast, showInfoToast } from "../../utils/toast";
+import { ToastContainer } from 'react-toastify';
 
 type Meal = {
   [key: string]: string
@@ -9,9 +11,13 @@ const Home = () => {
     const [meals, setMeals] = useState<Array<Meal>>([]);
 
     async function getMeals(pesquisa: string) {
-      await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${pesquisa}`)
+      await fetch(`http://www.themealdb.com/api/json/v1/1/search.php?s=${pesquisa}`)
       .then(data => data.json())
-      .then(data => {setMeals(data.meals)});
+      .then(data => {
+        setMeals(data.meals)
+        showSuccessToast('Receitas encontradas!')
+      })
+      .catch(() => {showErrorToast('Algo deu errado!')});
     }
 
     useEffect(() => {
@@ -40,6 +46,7 @@ const Home = () => {
             })
           }
         </div>
+        <ToastContainer/>
     </div>
   )
 }

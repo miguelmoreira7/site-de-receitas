@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import { ALL_LETTERS } from "../../constants";
 import NoItems from "../NoItems";
 import Card from "../card/Card";
+import { showSuccessToast, showErrorToast, showInfoToast } from "../../utils/toast";
+import { ToastContainer } from 'react-toastify';
 
 type Meal = {
   [key: string]: string;
@@ -16,10 +18,16 @@ const SearchByLetter = () => {
     await fetch(
       `https://www.themealdb.com/api/json/v1/1/search.php?f=${letter}`
     )
-      .then((data) => data.json())
-      .then((data) => {
-        setMeals(data.meals);
-      });
+      .then(data => data.json())
+      .then(data => {
+        setMeals(data.meals)
+        if (data.meals?.length > 0) {
+          showSuccessToast('Receitas encontradas!')
+        } else {
+          showInfoToast('Receitas não encontradas!')
+        }
+      })
+      .catch(() => {showErrorToast('Algo deu errado!')});
   }
 
   useEffect(() => {
@@ -67,7 +75,7 @@ const SearchByLetter = () => {
           );
         })}
       </div>
-      {letter && meals?.length === 0 && <NoItems />}
+      <ToastContainer/>
     </div>
   );
 };

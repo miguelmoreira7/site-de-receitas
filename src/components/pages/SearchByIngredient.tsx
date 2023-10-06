@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react"
+import { showSuccessToast, showErrorToast, showInfoToast } from "../../utils/toast";
+import { ToastContainer } from 'react-toastify';
 
 type Ingredient = {
   [key: string]: string
@@ -11,7 +13,15 @@ const SearchByIngredient = () => {
   async function getIngredients() {
     await fetch(`https://www.themealdb.com/api/json/v1/1/list.php?i=list`)
     .then(data => data.json())
-    .then(data => {setIngredients(data.meals)})
+      .then(data => {
+        setIngredients(data.meals)
+        if (data.meals?.length > 0) {
+          showSuccessToast('Receitas encontradas!')
+        } else {
+          showInfoToast('Receitas não encontradas!')
+        }
+      })
+      .catch(() => {showErrorToast('Algo deu errado!')});
   }
   
   useEffect(() => {
@@ -43,6 +53,7 @@ const SearchByIngredient = () => {
             }
         </div>
       </div>
+      <ToastContainer/>
     </div>
   )
 }

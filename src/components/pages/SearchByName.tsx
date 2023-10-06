@@ -1,27 +1,36 @@
 import { KeyboardEvent, useEffect, useState } from "react"
 import NoItems from "../NoItems"
 import Card from "../card/Card"
+import { showSuccessToast, showErrorToast, showInfoToast } from "../../utils/toast";
+import { ToastContainer } from 'react-toastify';
 
 type Meal = {
   [key: string]: string
 }
 
-function SearchByName() {
+const SearchByName = () => {
+
+  const [value, setValue] = useState('')
+  const [meals, setMeals] = useState<Array<Meal>>([])
+
   const handleSubmit = (e:KeyboardEvent) => {
     if (e.key === 'Enter') {
       getMeals(value)
     }
   }
   
-  const [value, setValue] = useState('')
-  const [meals, setMeals] = useState<Array<Meal>>([])
-
   async function getMeals(pesquisa: string) {
     await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${pesquisa}`)
     .then(data => data.json())
-    .then(data => {
-      setMeals(data.meals)
-    })
+      .then(data => {
+        setMeals(data.meals)
+        if (data.meals?.length > 0) {
+          showSuccessToast('Receitas encontradas!')
+        } else {
+          showInfoToast('Receitas não encontradas!')
+        }
+      })
+      .catch(() => {showErrorToast('Algo deu errado!')});
   }
   
   useEffect(() => {
@@ -58,11 +67,7 @@ function SearchByName() {
             })
           }
       </div>
-      {
-        meals?.length == 0 && (
-          <NoItems/>
-        )
-      }
+      <ToastContainer/>
     </div>
   )
 }
