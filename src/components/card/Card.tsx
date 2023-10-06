@@ -1,6 +1,7 @@
 import SubmitButton from "./SubmitButton"
 
 type CardProps = {
+  idMeal: string,
   name: string,
   description: string,
   img: string,

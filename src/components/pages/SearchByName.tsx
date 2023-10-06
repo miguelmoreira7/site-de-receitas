@@ -45,7 +45,9 @@ function SearchByName() {
           {
             meals?.map((meal, index) => {
               return (
-                <Card key = {index}
+                <Card 
+                idMeal = {meal.idMeal}
+                key = {meal.idMeal}
                 name={meal.strMeal}
                 description={meal.strInstructions}
                 img={meal.strMealThumb}

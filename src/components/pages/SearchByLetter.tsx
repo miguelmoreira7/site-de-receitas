@@ -53,10 +53,11 @@ const SearchByLetter = () => {
         })}
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5 px-8 pb-8">
-        {meals?.map((meal, index) => {
+        {meals?.map((meal) => {
           return (
             <Card
-              key={index}
+              idMeal={meal.idMeal}
+              key={meal.idMeal}
               name={meal.strMeal}
               description={meal.strInstructions}
               img={meal.strMealThumb}

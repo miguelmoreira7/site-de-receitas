@@ -5,14 +5,13 @@ type Meal = {
   [key: string]: string
 }
 
-function Home() {
-    const [meals, setMeals] = useState<Array<Meal>>([])
- 
+const Home = () => {
+    const [meals, setMeals] = useState<Array<Meal>>([]);
 
     async function getMeals(pesquisa: string) {
       await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${pesquisa}`)
       .then(data => data.json())
-      .then(data => {setMeals(data.meals)})
+      .then(data => {setMeals(data.meals)});
     }
 
     useEffect(() => {
@@ -26,9 +25,11 @@ function Home() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 px-8">
           {
-            meals?.map((meal, index) => {
+            meals?.map((meal) => {
               return (
-                <Card key = {index}
+                <Card 
+                idMeal={meal.idMeal}
+                key = {meal.idMeal}
                 name={meal.strMeal}
                 description={meal.strInstructions}
                 img={meal.strMealThumb}
