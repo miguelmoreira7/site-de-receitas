@@ -1,5 +1,4 @@
 import { KeyboardEvent, useEffect, useState } from "react"
-import NoItems from "../NoItems"
 import Card from "../card/Card"
 import { showSuccessToast, showErrorToast, showInfoToast } from "../../utils/toast";
 import { ToastContainer } from 'react-toastify';
@@ -52,7 +51,7 @@ const SearchByName = () => {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5 px-8 pb-8">
           {
-            meals?.map((meal, index) => {
+            meals?.map((meal) => {
               return (
                 <Card 
                 idMeal = {meal.idMeal}

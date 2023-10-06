@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Card from '../card/Card'
-import NoItems from "../NoItems";
 import { showSuccessToast, showErrorToast, showInfoToast } from "../../utils/toast";
 import { ToastContainer } from 'react-toastify';
 
@@ -58,7 +57,6 @@ const MealsByIngredient = () => {
           );
         })}
       </div>
-      {ingredient && meals?.length === 0 && <NoItems />}
     </div>
     <ToastContainer/>
     </div>

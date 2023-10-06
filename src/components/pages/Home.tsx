@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Card from '../card/Card'
-import { showSuccessToast, showErrorToast, showInfoToast } from "../../utils/toast";
+import { showSuccessToast, showErrorToast} from "../../utils/toast";
 import { ToastContainer } from 'react-toastify';
 
 type Meal = {
