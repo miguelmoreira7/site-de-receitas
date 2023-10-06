@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Card from '../card/Card'
-import { showSuccessToast, showErrorToast} from "../../utils/toast";
+import { showSuccessToast, showErrorToast, showInfoToast} from "../../utils/toast";
 import { ToastContainer } from 'react-toastify';
 
 type Meal = {
@@ -15,13 +15,17 @@ const Home = () => {
       .then(data => data.json())
       .then(data => {
         setMeals(data.meals)
-        showSuccessToast('Receitas encontradas!')
+        if (data.meals?.length > 0) {
+          showSuccessToast('Receitas encontradas!')
+        } else {
+          showInfoToast('Receitas não encontradas!')
+        }
       })
       .catch(() => {showErrorToast('Algo deu errado!')});
-    }
+  }
 
     useEffect(() => {
-      getMeals('a');
+      getMeals('');
     }, [])
 
   return (
