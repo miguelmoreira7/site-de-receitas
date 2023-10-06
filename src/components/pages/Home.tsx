@@ -21,7 +21,7 @@ const Home = () => {
     }
 
     useEffect(() => {
-      getMeals('');
+      getMeals('a');
     }, [])
 
   return (
