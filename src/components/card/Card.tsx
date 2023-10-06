@@ -9,11 +9,11 @@ type CardProps = {
   url: string,
 }
 
-const Card = ({name, description, img, foodDetails, url}: CardProps) => {
+const Card = ({name, description, img, idMeal, url}: CardProps) => {
   const parsedDescription = description?.slice(0,130)
   return (
     <div className="bg-white shadow rounded-xl hover:scale-105 transition-all">
-      <a href={foodDetails}>
+      <a href={`/meal/${idMeal}`}>
         <img src={img} className="rounded-t-xl w-full h-48 object-cover"/>
       </a>
       <div className="p-3">

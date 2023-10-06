@@ -12,12 +12,6 @@ const SearchByLetter = () => {
   const { letter } = useParams();
   const [meals, setMeals] = useState<Array<Meal>>([]);
 
-  useEffect(() => {
-    if (letter) {
-      getMeals(letter);
-    }
-  }, [letter]);
-
   async function getMeals(letter: string) {
     await fetch(
       `https://www.themealdb.com/api/json/v1/1/search.php?f=${letter}`
@@ -27,6 +21,12 @@ const SearchByLetter = () => {
         setMeals(data.meals);
       });
   }
+
+  useEffect(() => {
+    if (letter) {
+      getMeals(letter);
+    }
+  }, [letter]);
 
   return (
     <div className="max-w-[1200px] mx-auto">

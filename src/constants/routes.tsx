@@ -5,5 +5,5 @@ export const routes = {
     BY_LETTER_PARAM: '/by-letter/:letter',
     BY_INGREDIENT: '/by-ingredient',
     BY_INGREDIENT_PARAM: '/by-ingredient/:ingredient',
-    MEAL_DETAILS: '/meal/:id'
+    MEAL_DETAILS: '/meal/:mealId'
   }

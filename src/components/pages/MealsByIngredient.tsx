@@ -12,17 +12,18 @@ const MealsByIngredient = () => {
   const { ingredient } = useParams();
   const [meals, setMeals] = useState<Array<Meal>>([]);
 
-  useEffect(() => {
-    if (ingredient) {
-      getMeals(ingredient);
-    }
-  }, [ingredient]);
-
   async function getMeals(ingredient: string) {
       await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`)
       .then(data => data.json())
       .then(data => {setMeals(data.meals)});
     }
+
+    useEffect(() => {
+      if (ingredient) {
+        getMeals(ingredient);
+      }
+    }, [ingredient]);
+  
 
   return (
     <div>
